@@ -7,7 +7,7 @@
 - [Documentation - dbdocs](https://dbdocs.io/?utm_source=dbdiagram)
 - [Database Markup Language - dbml](https://www.dbml.org/home/#intro)
 
-### Stap
+### Steps
 
 - [ ] EERD
 - [ ] Mappgin (name columns - wide rectangle)
