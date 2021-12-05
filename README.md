@@ -9,19 +9,19 @@
 
 ### Stap
 
-- [] EERD
-- [] Mappgin (name columns - wide rectangle)
-- [] schema (ER Model)
-- [] SQL
-  - [] Craete SQL
-  - [] insert SQL
-  - []  Select & join
--  [] EERD (hand)
+- [ ] EERD
+- [ ] Mappgin (name columns - wide rectangle)
+- [ ] schema (ER Model)
+- [ ] SQL
+  - [ ] Craete SQL
+  - [ ] insert SQL
+  - [ ]  Select & join
+-  [ ] EERD (hand)
 
 
  ### Tasks
  
- - [] title  responsible @ any-name 
+ - [ ] title  responsible @ any-name 
 
 
 ### if you have time 
