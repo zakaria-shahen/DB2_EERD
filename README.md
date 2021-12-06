@@ -26,7 +26,7 @@
 
 ### if you have time 
 
+- review data type columns
+- Documentation by tool online 
 - create notebook (.jupyter)
-- Documentation by 
-
- 
+- website by Python/Flask (fork [old_project](https://github.com/zakaria-shahen/MyCS50/tree/main/Final_Project)) 

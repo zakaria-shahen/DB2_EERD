@@ -1,10 +1,10 @@
 ## Rooms
 
-### option One
+### Option One
 
 - **schema** 
 
-![rooms schema](/rooms_schema_1.png)
+![rooms schema - modal 1](/rooms_schema_1.png)
 
 
 - **T-SQL**
@@ -51,5 +51,65 @@ create table cetagory_value(
 
 
 
-### option Two 
+### Option Two 
 
+- **schema**
+
+![rooms schema - modal 2](/rooms_schema_2.png)
+
+
+- **T-SQL**
+
+```sql
+drop table if exists rooms;
+drop table if exists rooms_layout;
+drop table if exists rooms_bed;
+drop table if exists rooms_occupancy;
+
+
+create table rooms_layout
+(
+    id int primary key,
+    name varchar(50)
+);
+
+
+create table rooms_bed
+(
+    id int primary key,
+    name varchar(50)
+);
+
+
+create table rooms_occupancy
+(
+    id int primary key,
+    name varchar(50)
+);
+
+
+create table rooms
+(
+    id int,
+    location_ varchar(50),
+    price money,
+    rooms_layout int,
+    rooms_bed int,
+    rooms_occupancy int,
+    primary key(id),
+    foreign key(rooms_layout) references rooms_layout(id),
+    foreign key(rooms_bed) references rooms_bed(id),
+    foreign key(rooms_occupancy) references rooms_occupancy(id)
+);
+```
+
+
+## Option There
+
+- **schema** 
+  
+- **T-SQL**
+
+```sql
+
+```
