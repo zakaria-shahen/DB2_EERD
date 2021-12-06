@@ -1,5 +1,10 @@
 ## Rooms
 
+> Note: Add `itmes` column on room table 
+> 
+> Or super table (id_FK, items) 
+
+
 ### Option One
 
 - **schema** 
@@ -92,6 +97,7 @@ create table rooms
 (
     id int,
     location_ varchar(50),
+    description_ text,
     price money,
     rooms_layout int,
     rooms_bed int,
@@ -104,7 +110,7 @@ create table rooms
 ```
 
 
-## Option There
+## Option Three
 
 - **schema** 
   
