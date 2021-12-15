@@ -21,7 +21,8 @@
 
  ### Tasks
  
- - [x] [Rooms](/rooms.md)  by @zakaria-shahen 
+ - [x] [Rooms](/rooms.md)  by @zakaria-shahen
+ - [ ] [check ERD](/ERD.drawio)
 
 
 ### if you have time 
