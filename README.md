@@ -9,7 +9,7 @@
 
 ### Steps
 
-- [ ] EERD
+- [x] EERD
 - [ ] Mappgin (name columns - wide rectangle)
 - [ ] schema (ER Model)
 - [ ] SQL
