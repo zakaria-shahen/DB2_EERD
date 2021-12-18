@@ -1,10 +1,8 @@
--- CREATE DATABASE Db2_2;
--- USE Db2_2;
--- --------------------------------------------------------
-
--- use master;
--- drop database Db2_2;
-
+use master;
+drop database Db2_2;
+CREATE DATABASE Db2_2;
+USE Db2_2;
+----------------------------------------------------------
 
 create table Room_Occupancy(
     id tinyint,
@@ -259,12 +257,10 @@ create table Rate(
 create table Rate__Employees(
     employees smallint,
     rate smallint,
+    primary key(employees, rate),
     foreign key(employees) references Employees(id),
     foreign key(rate) references Rate(id)
 );
-
-create index exmployees on Rate__Employees(employees);
-create index rate on Rate__Employees(rate);
 
 create table Bookings_Details(
     id smallint identity(1, 1),
@@ -296,3 +292,6 @@ create table Bookings_Details__Companion(
     foreign key(bookings_details) references Bookings_Details(id)
 )
 
+-- Get a list of tables and views in the current database
+SELECT table_catalog [database], table_schema [schema], table_name [name], table_type [type]
+FROM INFORMATION_SCHEMA.TABLES;
