@@ -2,23 +2,27 @@
 -- USE Db2_2;
 -- --------------------------------------------------------
 
+-- use master;
+-- drop database Db2_2;
+
+
 create table Room_Occupancy(
     id tinyint,
     name_ char(10),
     primary key(id)
-)
+);
 
 create table Room_Bed(
     id tinyint,
     name_ char(10),
     primary key(id)
-)
+);
 
 create table Room_Layout(
     id tinyint,
     name_ char(10),
     primary key(id)
-)
+);
 
 --------------------------------------------------------
 
@@ -32,19 +36,25 @@ create table Room_Category(
     foreign key(room_occupancy) references Room_Occupancy(id),
     foreign key(room_bed) references Room_Bed(id),
     foreign key(room_layout) references Room_Layout(id)
-)
+);
+
+create index room_occupancy on Room_Category(room_occupancy);
+create index room_bed on Room_Category(room_bed);
+create index room_layout on Room_Category(room_layout);
 
 create table Rooms(
-    id smallint,
+    id smallint, -- LOOK: change(Rooms) to tinyint? 
     room_category tinyint,
     primary key(id),
     foreign key(room_category) references Room_Category(id)
-)
+);
+
+create index room_category on Rooms(room_category);
 
 ----------------------------------------
 
 create table Booked_Rooms(
-    id smallint,
+    id smallint, -- chenge data type to int ? 
     booking_date datetime2,
     check_in_date datetime2,
     check_out_date datetime2,
@@ -52,7 +62,7 @@ create table Booked_Rooms(
     -- total_price smallmoney, -- why?Edit here Comment: @zakaria-shshen
     -- Where Loaction attr?
     primary key(id)
-)
+);
 
 
 create table Booked_Rooms__Rooms(
@@ -61,7 +71,10 @@ create table Booked_Rooms__Rooms(
     primary key (rooms, booked_rooms),
     foreign key(booked_rooms) references Booked_Rooms(id),
     foreign key(rooms) references Rooms(id)
-)
+);
+
+create index rooms on Booked_Rooms__Rooms(rooms);
+create index booked_rooms on Booked_Rooms__Rooms(booked_rooms);
 
 -------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------
@@ -72,17 +85,20 @@ create table Services(
     details text,
     price smallmoney,
     primary key(id)
-)
+);
 
 -- this Table(Booked_Services) remove (in review)
+-- chenge name to logs_services
 create table Booked_Services(
-    id smallint,
+    id smallint, -- change data tpye to int?
     booking_date datetime2,
     total_price smallmoney, -- Look here
     services tinyint,
-    primary key(id, services),
+    primary key(id),
     foreign key(services) references Services(id)
-)
+);
+
+create index services on Booked_Services(services);
 
 create table Booked_Services__Services(
     services tinyint,
@@ -92,25 +108,11 @@ create table Booked_Services__Services(
     foreign key(services) references Services(id)
 )
 
+create index booked_services on Booked_Services__Services(booked_services);
+create index services on Booked_Services__Services(services);
+
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
-
-create table Companion(
-    id smallint,
-    full_name varchar(40),
-    primary key(id)
-)
-
-create table Bookings_Details__Companion(
-    companion smallint,
-    bookings_details smallint,
-    primary key (companion, bookings_details),
-    foreign key(companion) references Companion(id),
-    foreign key(bookings_details) references Bookings_Details(id),
-)
-
-
-
 
 
 -- 
@@ -177,7 +179,7 @@ create table Payment_method(
 ); 
 
 -- Payment method
-create table Bookings_Details(
+create table Payment(
     id tinyint identity(1, 1), -- Look here
     card_number tinyint,
     favorite bit,
@@ -188,8 +190,8 @@ create table Bookings_Details(
     foreign key(payment_method) references Payment_method(id) 
 );
 
-create index guests on Bookings_Details(guests);
-create index payment_method on Bookings_Details(payment_method);
+create index guests on Payment(guests);
+create index payment_method on Payment(payment_method);
 
 create table Invoice(
     id smallint,
@@ -197,8 +199,7 @@ create table Invoice(
     price smallmoney,
     date_ date,
     bookings_details tinyint unique not null,
-    primary key (id),
-    foreign key(bookings_details) references Bookings_Details
+    primary key (id)
 );
 
 create index bookings_details on Invoice(bookings_details)
@@ -245,6 +246,53 @@ create table Employees(
 
 create index job_title on Employees(job_title);
 
--- Get a list of tables and views in the current database
-SELECT table_catalog [database], table_schema [schema], table_name [name], table_type [type]
-FROM INFORMATION_SCHEMA.TABLES;
+
+-- After Guests and Employees and jobTitel
+
+create table Rate(
+    id smallint identity(1, 1),
+    rate tinyint check(rate >= 1 and rate <= 5),
+    bookings_details smallint,
+    primary key(id)
+);
+
+create table Rate__Employees(
+    employees smallint,
+    rate smallint,
+    foreign key(employees) references Employees(id),
+    foreign key(rate) references Rate(id)
+);
+
+create index exmployees on Rate__Employees(employees);
+create index rate on Rate__Employees(rate);
+
+create table Bookings_Details(
+    id smallint identity(1, 1),
+    guests smallint,
+    booked_rooms smallint,
+    booked_services smallint,
+    rate smallint not null,
+    invoice smallint not null,
+    primary key(id),
+    -- primary key(guests, booked_rooms, booked_services),
+    foreign key(guests) references Guests(id),
+    foreign key(booked_rooms) references Booked_Rooms(id),
+    foreign key(booked_services) references Booked_Services(id),
+    foreign key(invoice) references Invoice(id)
+    
+);
+
+create table Companion(
+    id smallint,
+    full_name varchar(40),
+    primary key(id)
+)
+
+create table Bookings_Details__Companion(
+    companion smallint,
+    bookings_details smallint,
+    primary key (companion, bookings_details),
+    foreign key(companion) references Companion(id),
+    foreign key(bookings_details) references Bookings_Details(id)
+)
+
