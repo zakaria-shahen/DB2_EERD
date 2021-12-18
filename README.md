@@ -22,7 +22,14 @@
  ### Tasks
  
  - [x] [Rooms](/rooms.md)  by @zakaria-shahen
- - [ ] [check ERD](/ERD.drawio)
+ - [x] [check ERD](/ERD.drawio)
+ - [x] creating database
+ - [ ] schema
+ - [ ] mapping
+ - [ ] structure of tables
+ - [ ] inserting data
+ - [ ] screenshots for data
+ - [ ] queries 
 
 
 ### if you have time 
