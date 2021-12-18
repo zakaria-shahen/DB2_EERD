@@ -2,8 +2,8 @@ use master;
 drop database if exists Db2_2;
 
 
-create database DB2_Project;
 drop database if exists DB2_Project;
+create database DB2_Project;
 use DB2_Project;
 
 ---------------------------------------------------------------
