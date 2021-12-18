@@ -41,7 +41,7 @@ create index room_bed on Room_Category(room_bed);
 create index room_layout on Room_Category(room_layout);
 
 create table Rooms(
-    id smallint, -- LOOK: change(Rooms) to tinyint? 
+    id smallint,
     room_category tinyint,
     primary key(id),
     foreign key(room_category) references Room_Category(id)
@@ -52,20 +52,19 @@ create index room_category on Rooms(room_category);
 ----------------------------------------
 
 create table Booked_Rooms(
-    id smallint, -- chenge data type to int ? 
+    id int, 
     booking_date datetime2,
     check_in_date datetime2,
     check_out_date datetime2,
-    -- duration as check_out_date - check_in_date, -- invalid syntaxt => move to select (only)
+    -- duration as datediff(check_out_date, check_in_date), -- invalid syntaxt => move to select (only)
     -- total_price smallmoney, -- why?Edit here Comment: @zakaria-shshen
-    -- Where Loaction attr?
     primary key(id)
 );
 
 
 create table Booked_Rooms__Rooms(
     rooms smallint,
-    booked_rooms smallint,
+    booked_rooms int,
     primary key (rooms, booked_rooms),
     foreign key(booked_rooms) references Booked_Rooms(id),
     foreign key(rooms) references Rooms(id)
@@ -85,29 +84,26 @@ create table Services(
     primary key(id)
 );
 
--- this Table(Booked_Services) remove (in review)
--- chenge name to logs_services
-create table Booked_Services(
-    id smallint, -- change data tpye to int?
+create table Logs_Services(
+    id int, 
     booking_date datetime2,
-    total_price smallmoney, -- Look here
     services tinyint,
     primary key(id),
     foreign key(services) references Services(id)
 );
 
-create index services on Booked_Services(services);
+create index services on Logs_Services(services);
 
-create table Booked_Services__Services(
+create table Logs_Services__Services(
     services tinyint,
-    booked_services smallint,
-    primary key (services, booked_services),
-    foreign key(booked_services) references Booked_Services(id),
+    logs_services int,
+    primary key (services, logs_services),
+    foreign key(logs_services) references Logs_Services(id),
     foreign key(services) references Services(id)
 )
 
-create index booked_services on Booked_Services__Services(booked_services);
-create index services on Booked_Services__Services(services);
+create index logs_services on Logs_Services__Services(logs_services);
+create index services on Logs_Services__Services(services);
 
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
@@ -244,9 +240,6 @@ create table Employees(
 
 create index job_title on Employees(job_title);
 
-
--- After Guests and Employees and jobTitel
-
 create table Rate(
     id smallint identity(1, 1),
     rate tinyint check(rate >= 1 and rate <= 5),
@@ -265,15 +258,16 @@ create table Rate__Employees(
 create table Bookings_Details(
     id smallint identity(1, 1),
     guests smallint,
-    booked_rooms smallint,
-    booked_services smallint,
+    booked_rooms int,
+    logs_services int,
     rate smallint not null,
     invoice smallint not null,
     primary key(id),
-    -- primary key(guests, booked_rooms, booked_services),
+    -- primary key(guests, booked_rooms, logs_services),
     foreign key(guests) references Guests(id),
     foreign key(booked_rooms) references Booked_Rooms(id),
-    foreign key(booked_services) references Booked_Services(id),
+    foreign key(logs_services) references Logs_Services(id),
+    foreign key(rate) references Rate(id),
     foreign key(invoice) references Invoice(id)
     
 );
