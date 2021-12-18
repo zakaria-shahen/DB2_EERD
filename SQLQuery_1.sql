@@ -1,8 +1,14 @@
+-- CREATE DATABASE Db2_2;
+-- USE Db2_2;
+-- --------------------------------------------------------
+
 use master;
 drop database Db2_2;
-CREATE DATABASE Db2_2;
-USE Db2_2;
-----------------------------------------------------------
+
+
+create database DB2_Project;
+use DB2_Project;
+
 
 create table Room_Occupancy(
     id tinyint,
@@ -24,9 +30,12 @@ create table Room_Layout(
 
 --------------------------------------------------------
 
+drop table if exists Room_Category
 create table Room_Category(
     id tinyint,
     name_ char(10),
+    description_ text,
+    price smallmoney,
     room_occupancy tinyint,
     room_bed tinyint,
     room_layout tinyint,
@@ -40,6 +49,8 @@ create index room_occupancy on Room_Category(room_occupancy);
 create index room_bed on Room_Category(room_bed);
 create index room_layout on Room_Category(room_layout);
 
+----------------------------------------
+
 create table Rooms(
     id smallint,
     room_category tinyint,
@@ -49,7 +60,6 @@ create table Rooms(
 
 create index room_category on Rooms(room_category);
 
-----------------------------------------
 
 create table Booked_Rooms(
     id int, 
@@ -62,7 +72,7 @@ create table Booked_Rooms(
 );
 
 
-create table Booked_Rooms__Rooms(
+create table Used_Rooms(
     rooms smallint,
     booked_rooms int,
     primary key (rooms, booked_rooms),
@@ -70,8 +80,8 @@ create table Booked_Rooms__Rooms(
     foreign key(rooms) references Rooms(id)
 );
 
-create index rooms on Booked_Rooms__Rooms(rooms);
-create index booked_rooms on Booked_Rooms__Rooms(booked_rooms);
+create index rooms on Used_Rooms(rooms);
+create index booked_rooms on Used_Rooms(booked_rooms);
 
 -------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------
@@ -84,17 +94,19 @@ create table Services(
     primary key(id)
 );
 
+-- this Table(Booked_Services) remove (in review)
+-- chenge name to Logs_services  approved
 create table Logs_Services(
-    id int, 
+    id int, -- change data tpye to int? done
     booking_date datetime2,
-    services tinyint,
+    -- services tinyint, his PK goes to Used_Services @Omar MK
     primary key(id),
-    foreign key(services) references Services(id)
+    -- foreign key(services) references Services(id) @Omar MK
 );
 
-create index services on Logs_Services(services);
+-- create index services on Logs_Services(services); @Omar MK
 
-create table Logs_Services__Services(
+create table Used_Services(
     services tinyint,
     logs_services int,
     primary key (services, logs_services),
@@ -102,8 +114,8 @@ create table Logs_Services__Services(
     foreign key(services) references Services(id)
 )
 
-create index logs_services on Logs_Services__Services(logs_services);
-create index services on Logs_Services__Services(services);
+create index booked_services on Used_Services(logs_services);
+create index services on Used_Services(services);
 
 ---------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
@@ -158,7 +170,7 @@ create table Family(
     name_ varchar(40),
     guest smallint,
     relationship tinyint,
-    primary key(id, guest), 
+    primary key(id, guest),
     foreign key(guest) references Guests(id),
     foreign key(relationship) references Relationship(id)
 );
@@ -176,7 +188,7 @@ create table Payment_method(
 create table Payment(
     id tinyint identity(1, 1), -- Look here
     card_number tinyint,
-    favorite bit,
+    favorite bit,   
     guests smallint unique not null,
     payment_method tinyint unique not null,
     primary key (id),
@@ -244,39 +256,49 @@ create table Rate(
     id smallint identity(1, 1),
     rate tinyint check(rate >= 1 and rate <= 5),
     bookings_details smallint,
-    primary key(id)
+    employees smallint, -- look down
+    primary key(id),
+    foreign key(employees) references Employees(id)
 );
 
-create table Rate__Employees(
+
+-- one : many relationship between rate and employees @Omar MK
+/*create table Rate_Employees(
     employees smallint,
     rate smallint,
-    primary key(employees, rate),
     foreign key(employees) references Employees(id),
     foreign key(rate) references Rate(id)
 );
 
+create index exmployees on Rate__Employees(employees);
+create index rate on Rate__Employees(rate);
+*/
+
+
 create table Bookings_Details(
     id smallint identity(1, 1),
     guests smallint,
+    employees smallint, -- the reseptionest who makes the reservation @Omar MK
     booked_rooms int,
     logs_services int,
-    rate smallint not null,
+    rate smallint, 
     invoice smallint not null,
     primary key(id),
-    -- primary key(guests, booked_rooms, logs_services),
+    -- primary key(guests, booked_rooms, booked_services),  approved
     foreign key(guests) references Guests(id),
+    foreign key(employees) references Employees(id),
     foreign key(booked_rooms) references Booked_Rooms(id),
     foreign key(logs_services) references Logs_Services(id),
-    foreign key(rate) references Rate(id),
     foreign key(invoice) references Invoice(id)
-    
 );
+
 
 create table Companion(
     id smallint,
     full_name varchar(40),
     primary key(id)
 )
+
 
 create table Bookings_Details__Companion(
     companion smallint,
@@ -286,6 +308,3 @@ create table Bookings_Details__Companion(
     foreign key(bookings_details) references Bookings_Details(id)
 )
 
--- Get a list of tables and views in the current database
-SELECT table_catalog [database], table_schema [schema], table_name [name], table_type [type]
-FROM INFORMATION_SCHEMA.TABLES;
