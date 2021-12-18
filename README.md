@@ -26,7 +26,8 @@
  - [x] creating database
  - [ ] schema
  - [ ] mapping
- - [ ] structure of tables 
+ - [ ] structure of tables
+ - [ ] inserting data
  - [ ] screenshots for data
  - [ ] queries 
 
