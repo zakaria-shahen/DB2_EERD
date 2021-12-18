@@ -68,9 +68,9 @@ create index room_category on Rooms(room_category);
 drop table if exists Booked_Rooms;
 create table Booked_Rooms(
     id int, 
-    booking_date datetime2,
-    check_in_date datetime2,
-    check_out_date datetime2,
+    booking_date date,
+    check_in_date date,
+    check_out_date date,
     primary key(id)
 );
 ---
@@ -103,7 +103,7 @@ create table Services(
 drop table if exists Logs_Services;
 create table Logs_Services(
     id int,
-    booking_date datetime2,
+    booking_date date,
     primary key(id)
 );
 ---
@@ -224,8 +224,8 @@ create table Discount(
     id tinyint,
     type_ varchar(40),
     discount_rate tinyint,
-    start_ datetime2, 
-    end_ datetime2,
+    start_ date, 
+    end_ date,
     primary key(id)
 );
 ---
