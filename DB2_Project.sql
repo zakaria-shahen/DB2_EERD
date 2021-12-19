@@ -11,7 +11,7 @@ use DB2_Project;
 drop table if exists Room_Occupancy;
 create table Room_Occupancy(
     id tinyint,
-    name_ char(10),
+    name_ char(20),
     primary key(id)
 );
 ---
@@ -19,7 +19,7 @@ create table Room_Occupancy(
 drop table if exists Room_Bed;
 create table Room_Bed(
     id tinyint,
-    name_ char(10),
+    name_ char(20),
     primary key(id)
 );
 ---
@@ -27,7 +27,7 @@ create table Room_Bed(
 drop table if exists Room_Layout;
 create table Room_Layout(
     id tinyint,
-    name_ char(10),
+    name_ char(20),
     primary key(id)
 );
 
@@ -36,7 +36,7 @@ create table Room_Layout(
 drop table if exists Room_Category;
 create table Room_Category(
     id tinyint,
-    name_ char(10),
+    name_ char(30),
     description_ text,
     price smallmoney,
     room_occupancy tinyint,
@@ -93,7 +93,7 @@ create index booked_rooms on Used_Rooms(booked_rooms);
 drop table if exists Services;
 create table Services(
     id tinyint,
-    name_ varchar(20),
+    name_ varchar(30),
     details text,
     price smallmoney,
     primary key(id)
@@ -133,7 +133,6 @@ create table People(
     country varchar(20),
     city varchar(20),
     street varchar(40),
-    nationality_code char(5),
     brith date,
     email varchar(40),
     primary key(id)
@@ -257,7 +256,6 @@ create table Employees(
     salary smallmoney,
     work_hours tinyint,
     hire_date date,
-    creer_level tinyint,
     job_title tinyint,
     primary key(id),
     foreign key(id) references People(id),
