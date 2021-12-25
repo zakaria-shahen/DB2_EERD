@@ -2,12 +2,12 @@
 - [X] ERD
 - [X] SQL
 - [ ] review Date type
-- [ ] create 2 view table
+- [X] create 2 view table
 - [ ] 8 query
-- [ ] schema 
+- [x] schema 
 - [ ] word  
   - [X] Business Rules
   - [ ] add ERD
-  - [ ] add schema
-  - [ ] add view table
+  - [X] add schema
+  - [X] add view table
   - [ ] add 8 query

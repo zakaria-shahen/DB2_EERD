@@ -139,6 +139,7 @@ create index room_category on Room(room_category)
 create table Booked__Room(
     booked int,
     room smallint,
+    price smallmoney,
     primary key(booked, room),
     foreign key(booked) references Booked(id),
     foreign key(room) references Room(id)
@@ -178,7 +179,7 @@ create table Invoice_Details(
 );
 
 
-create table Discount_Category(
+create table Discount(
     id smallint,
     start_date_ date,
     end_date date,
@@ -187,13 +188,13 @@ create table Discount_Category(
     primary key(id)
 );
 
-create table Invoice_Details__Discount_Category(
+create table Invoice_Details__Discount(
     value_ smallint,
     invoice_details int,
-    discount_category smallint,
-    primary key(invoice_details, discount_category),
+    discount smallint,
+    primary key(invoice_details, discount),
     foreign key(invoice_details) references Invoice_Details(id_by_booked),
-    foreign key(discount_category) references Discount_Category(id)
+    foreign key(discount) references Discount(id)
 );
 
 create table Fees(
@@ -232,6 +233,7 @@ create table Service_(
 create table Booked__Service(
     service_ tinyint,
     Booked int,
+    price smallmoney,
     primary key(service_, Booked),
     foreign key(service_) references Service_(id),
     foreign key(booked) references Booked(id)
