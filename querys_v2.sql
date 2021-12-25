@@ -33,32 +33,19 @@ left join Invoice_Details__Fees on invoice_details.id_by_booked = Invoice_Detail
 select * from Invoice;
 -- ============================================================================
 
--- ============================================================================
--- Comment
 
 -- ============================================================================
-
-
+--  عرض بيانات كل الغرف الفندق
+select 
+    Room.id as "ID",
+    Room.location_ as "Loaction",
+    Room_Bed.name_ as "Room_Bed",
+    Room_Layout.name_ as "Room_Layout",
+    Room_Occupancy.name_ as "Room_Occupancy",
+    Room_category.description_ as "description_"
+from Room 
+left join Room_category on Room.room_category = Room_category.id
+left join Room_Bed on Room_category.room_bed = Room_Bed.id
+left join Room_Layout on Room_category.room_bed = Room_Layout.id
+left join Room_Occupancy on Room_category.room_bed = Room_Occupancy.id
 -- ============================================================================
--- Comment
-
--- ============================================================================
-
-
--- ============================================================================
--- Comment
-
--- ============================================================================
-
-
--- ============================================================================
--- Comment
-
--- ============================================================================
-
-
--- ============================================================================
--- Comment
-
--- ============================================================================
-

@@ -1,40 +1,30 @@
 # DB2_EERD
 
-### Tools 
+### **Business Rules**
+
+- [PDF](Business_Rules_V2.pdf)
+- [word](Business_Rules_V2.docx)
+
+
+### **EERD**
+
+![EERD](EERD_schema_v2/EERD_V2.drawio.svg)
+
+
+### **Schema**  
+
+![](EERD_schema_v2/schema_l.png)
+
+
+### **Tools** 
  
 - [ERD - draw.io](https://draw.io)
 - [schema - dbdiagram.io](https://dbdiagram.io/home)
-- [Documentation - dbdocs](https://dbdocs.io/?utm_source=dbdiagram)
-- [Database Markup Language - dbml](https://www.dbml.org/home/#intro)
-
-### Steps
-
-- [x] EERD
-- [ ] Mappgin (name columns - wide rectangle)
-- [ ] schema (ER Model)
-- [ ] SQL
-  - [ ] Craete SQL
-  - [ ] insert SQL
-  - [ ]  Select & join
--  [ ] EERD (hand)
+- using... soon..
+  - [Documentation - dbdocs](https://dbdocs.io/?utm_source=dbdiagram)
+  - [Database Markup Language - dbml](https://www.dbml.org/home/#intro)
 
 
- ### Tasks
- 
- - [x] [Rooms](/rooms.md)  by @zakaria-shahen
- - [x] [check ERD](/ERD.drawio)
- - [x] creating database
- - [ ] schema
- - [ ] mapping
- - [ ] structure of tables
- - [ ] inserting data
- - [ ] screenshots for data
- - [ ] queries 
+### **More**
 
-
-### if you have time 
-
-- review data type columns
-- Documentation by tool online 
-- create notebook (.jupyter)
-- website by Python/Flask (fork [old_project](https://github.com/zakaria-shahen/MyCS50/tree/main/Final_Project)) 
+- [Rooms](/rooms.md)

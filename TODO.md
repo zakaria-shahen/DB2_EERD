@@ -2,12 +2,20 @@
 - [X] ERD
 - [X] SQL
 - [ ] review Date type
-- [X] create 2 view table
-- [ ] 8 query
+- [X] query (Select & View)
+  - [X] create 2 view table
+  - [X] other
 - [x] schema 
-- [ ] word  
+- [X] word  
   - [X] Business Rules
-  - [ ] add ERD
+  - [X] add ERD
   - [X] add schema
   - [X] add view table
-  - [ ] add 8 query
+  - [X] add 8 query
+
+
+### if you have time 
+
+- [ ] Documentation by tool online 
+- [ ] create notebook (.jupyter)
+- [ ] C#(.Net Core)

@@ -96,19 +96,19 @@ create table Booked__Attendant(
 
 create table Room_Bed (
     id tinyint identity(1, 1),
-    names varchar(40),
+    name_ varchar(40),
     primary key(id)
 );
 
 create table Room_Occupancy(
     id tinyint identity(1, 1),
-    names varchar(40),
+    name_ varchar(40),
     primary key(id)
 );
 
 create table Room_Layout(
     id tinyint identity(1, 1),
-    names varchar(40),
+    name_ varchar(40),
     primary key(id)
 );
 
@@ -154,7 +154,7 @@ create table Payment_Method(
 );
 
 create table Payment_Saved(
-    id int,
+    id int identity(1, 1),
     card_number tinyint,
     payment_method tinyint,
     reservation_owner int,
