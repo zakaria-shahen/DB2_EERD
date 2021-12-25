@@ -21,7 +21,8 @@ create table People(
 create table People__Phone(
     people int,
     phone varchar(20),
-    primary key(people, phone)
+    primary key(people, phone),
+    foreign key(people) references People(id)
 );
 
 create table Department(
@@ -127,7 +128,7 @@ create index room_occupancy on Room_category(room_occupancy);
 create index room_layout on Room_category(room_layout);
 
 create table Room(
-    id tinyint identity(1, 1),
+    id smallint identity(1, 1),
     room_category tinyint,
     location_ varchar(40),
     primary key(id),
@@ -137,7 +138,7 @@ create index room_category on Room(room_category)
 
 create table Booked__Room(
     booked int,
-    room tinyint,
+    room smallint,
     primary key(booked, room),
     foreign key(booked) references Booked(id),
     foreign key(room) references Room(id)
@@ -218,4 +219,20 @@ create table rete(
     description_ text,
     primary key(invoice_details),
     foreign key(invoice_details) references Invoice_Details(id_by_booked)
+);
+
+create table Service_(
+    id tinyint identity(1, 1),
+    name_ varchar(40),
+    price smallmoney,
+    details text,
+    primary key(id)
+);
+
+create table Booked__Service(
+    service_ tinyint,
+    Booked int,
+    primary key(service_, Booked),
+    foreign key(service_) references Service_(id),
+    foreign key(booked) references Booked(id)
 );

@@ -1,1 +1,13 @@
-## TODO
+## TODO Version 2
+- [X] ERD
+- [X] SQL
+- [ ] review Date type
+- [ ] create 2 view table
+- [ ] 8 query
+- [ ] schema 
+- [ ] word  
+  - [X] Business Rules
+  - [ ] add ERD
+  - [ ] add schema
+  - [ ] add view table
+  - [ ] add 8 query
